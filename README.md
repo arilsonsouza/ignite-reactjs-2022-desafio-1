@@ -42,6 +42,6 @@ $ yarn dev
 Acesse <http://localhost:3000> para ver o resultado.
 
 # :camera: Screenshots
-[Without tasks](screenshots/without-tasks.jpg)
-[Adding task](screenshots/adding-task.png)
-[With tasks](screenshots/with-tasks.png)
+![Without tasks](screenshots/without-tasks.jpg)
+![Adding task](screenshots/adding-task.png)
+![With tasks](screenshots/with-tasks.png)
