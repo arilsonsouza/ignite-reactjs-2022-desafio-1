@@ -33,6 +33,17 @@ function App() {
     event.target.setCustomValidity("Este campo é obrigatório!");
   }
 
+  function handleOnDoneTaskChange(task: TaskType) {
+    const updatedTasks: TaskType[] = tasks.map((currentTask) => {
+      if (currentTask.id === task.id) {
+        return { ...currentTask, done: !task.done };
+      }
+      return currentTask;
+    });
+
+    setTasks(updatedTasks);
+  }
+
   const isTaskTitleEmpty = taskTitle.length === 0;
   const tasksQtd = tasks.length;
   const completedTasks = tasks.reduce((acc, task) => {
@@ -86,7 +97,11 @@ function App() {
             ) : (
               <>
                 {tasks.map((task) => (
-                  <Task key={task.id} task={task} />
+                  <Task
+                    key={task.id}
+                    task={task}
+                    onDone={handleOnDoneTaskChange}
+                  />
                 ))}
               </>
             )}
