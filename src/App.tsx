@@ -33,7 +33,7 @@ function App() {
     event.target.setCustomValidity("Este campo é obrigatório!");
   }
 
-  function handleOnDoneTaskChange(task: TaskType) {
+  function onDoneTaskChange(task: TaskType) {
     const updatedTasks: TaskType[] = tasks.map((currentTask) => {
       if (currentTask.id === task.id) {
         return { ...currentTask, done: !task.done };
@@ -41,6 +41,13 @@ function App() {
       return currentTask;
     });
 
+    setTasks(updatedTasks);
+  }
+
+  function onDeleteTask(task: TaskType) {
+    const updatedTasks: TaskType[] = tasks.filter(
+      (currentTask) => currentTask.id !== task.id
+    );
     setTasks(updatedTasks);
   }
 
@@ -100,7 +107,8 @@ function App() {
                   <Task
                     key={task.id}
                     task={task}
-                    onDone={handleOnDoneTaskChange}
+                    onDone={onDoneTaskChange}
+                    onDeleteTask={onDeleteTask}
                   />
                 ))}
               </>

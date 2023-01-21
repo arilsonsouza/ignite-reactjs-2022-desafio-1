@@ -5,11 +5,16 @@ import styles from "./Task.module.scss";
 type TaskProps = {
   task: TaskType;
   onDone: (task: TaskType) => void;
+  onDeleteTask: (task: TaskType) => void;
 };
 
-export function Task({ task, onDone }: TaskProps) {
+export function Task({ task, onDone, onDeleteTask }: TaskProps) {
   function handleTaskDoneChange() {
     onDone(task);
+  }
+
+  function handleDeleteTask() {
+    onDeleteTask(task);
   }
 
   return (
@@ -23,7 +28,7 @@ export function Task({ task, onDone }: TaskProps) {
       </label>
       <span className={styles.taskText}>{task.title}</span>
 
-      <button className={styles.btnDeleteTask}>
+      <button className={styles.btnDeleteTask} onClick={handleDeleteTask}>
         <Trash />
       </button>
     </div>
