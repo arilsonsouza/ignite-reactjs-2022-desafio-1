@@ -1,19 +1,63 @@
+import { ChangeEvent, FormEvent, useState } from "react";
 import { ClipboardText, PlusCircle } from "phosphor-react";
-import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import styles from "./App.module.scss";
 import { Header } from "./components/Header";
 import { Task } from "./components/Task";
+import { TaskType } from "./@types";
 
 function App() {
-  const [tasks, setTasks] = useState([1, 2, 3, 4, 5]);
+  const [tasks, setTasks] = useState<TaskType[]>([]);
+  const [taskTitle, setTaskTitle] = useState("");
 
+  function handleCreateTask(event: FormEvent) {
+    event.preventDefault();
+
+    const task: TaskType = {
+      id: uuidv4(),
+      title: taskTitle,
+      done: false,
+    };
+
+    setTasks((previousTasks) => [...previousTasks, task]);
+    setTaskTitle("");
+  }
+
+  function handleTaskTitleChange(event: ChangeEvent<HTMLInputElement>) {
+    event.target.setCustomValidity("");
+    setTaskTitle(event.target.value);
+  }
+
+  function handleNewTaskInvalid(event: ChangeEvent<HTMLInputElement>) {
+    event.target.setCustomValidity("Este campo é obrigatório!");
+  }
+
+  const isTaskTitleEmpty = taskTitle.length === 0;
+  const tasksQtd = tasks.length;
+  const completedTasks = tasks.reduce((acc, task) => {
+    if (task.done) {
+      return acc + 1;
+    }
+    return acc;
+  }, 0);
+
+  // Integer urna interdum massa libero auctor neque turpis turpis semper.
+  // Duis vel sed fames integer.
   return (
     <div className={styles.app}>
       <Header />
       <div className={styles.container}>
-        <form>
-          <input type="text" placeholder="Adicione uma nova tarefa" />
-          <button type="submit">
+        <form onSubmit={handleCreateTask}>
+          <input
+            type="text"
+            placeholder="Adicione uma nova tarefa"
+            required
+            value={taskTitle}
+            onChange={handleTaskTitleChange}
+            onInvalid={handleNewTaskInvalid}
+          />
+          <button type="submit" disabled={isTaskTitleEmpty}>
             Criar
             <PlusCircle size={16} />
           </button>
@@ -23,11 +67,13 @@ function App() {
           <div className={styles.tasksInfo}>
             <div className={styles.tasksCreated}>
               <strong>Tarefas criadas</strong>
-              <span className={styles.tasksBadge}>5</span>
+              <span className={styles.tasksBadge}>{tasksQtd}</span>
             </div>
             <div className={styles.tasksDone}>
               <strong>Concluídas</strong>
-              <span className={styles.tasksBadge}>2 de 5</span>
+              <span className={styles.tasksBadge}>
+                {completedTasks} de {tasksQtd}
+              </span>
             </div>
           </div>
           <div className={styles.tasks}>
@@ -40,7 +86,7 @@ function App() {
             ) : (
               <>
                 {tasks.map((task) => (
-                  <Task />
+                  <Task key={task.id} task={task} />
                 ))}
               </>
             )}
