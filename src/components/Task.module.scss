@@ -1,0 +1,104 @@
+.task {
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem;
+    justify-content: space-between;
+    background-color: var(--gray-500);
+    border: 1px solid var(--gray-400);
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+    color: var(--gray-100);
+
+    &Done {
+        text-decoration: line-through;
+        text-decoration-color: var(--gray-300);
+        color: var(--gray-300);
+    }
+
+    &+.task {
+        margin-top: 1rem;
+    }
+
+    .taskText {
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 140%;
+        margin: 0 0.75rem;
+    }
+
+    .btnDeleteTask {
+        color: var(--gray-300);
+        background: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+
+        &:hover {
+            color: var(--red-300);
+        }
+    }
+
+    .formControl {
+        font-weight: bold;
+        line-height: 1.1;
+        display: grid;
+        grid-template-columns: 1rem auto;
+        gap: 0.5rem;
+
+        input[type="checkbox"] {
+            /* Add if not using autoprefixer */
+            -webkit-appearance: none;
+            /* Remove most all native input styles */
+            appearance: none;
+            /* For iOS < 15 */
+            background-color: transparent;
+            /* Not removed via appearance */
+            margin: 0;
+
+            color: var(--white);
+            width: 1.15rem;
+            height: 1.15rem;
+            border: 0.15rem solid var(--blue-300);
+            border-radius: 1rem;
+            transform: translateY(-0.075rem);
+            padding: 0.5rem;
+            transition: background-color 0.1s;
+            display: grid;
+            place-content: center;
+            cursor: pointer;
+            outline: none;
+
+            &:hover {
+                background-color: rgba(78, 168, 222, 0.2);
+            }
+
+            &:checked {
+                background-color: var(--purple-700);
+                border-color: var(--purple-700);
+
+                &:hover {
+                    background-color: var(--purple-300);
+                    border-color: var(--purple-300);
+                }
+            }
+
+            &::before {
+                content: "";
+                width: 0.65em;
+                height: 0.65em;
+                clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+                transform: scale(0);
+                transform-origin: bottom left;
+                transition: 120ms transform ease-in-out;
+                box-shadow: inset 1em 1em var(--white);
+
+            }
+
+            &:checked::before {
+                transform: scale(1);
+            }
+
+        }
+    }
+}
