@@ -1,5 +1,6 @@
 .app {
     .container {
+        padding: 0 1rem;
         max-width: 46rem;
         margin: 0 auto;
 
@@ -21,6 +22,7 @@
 
                 &:focus {
                     border: 1px solid var(--purple-700);
+                    color: var(--gray-100);
                 }
             }
 
@@ -50,6 +52,65 @@
                     background-color: var(--blue-300);
                     border-color: var(--blue-300);
                 }
+            }
+        }
+
+        .content {
+            margin-top: 4rem;
+
+            .tasksInfo {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-weight: 700;
+                font-style: normal;
+                line-height: 17px;
+                font-size: 0.875rem;
+
+                .tasksCreated {
+                    strong {
+                        color: var(--blue-300);
+                    }
+                }
+
+                .tasksDone {
+                    strong {
+                        color: var(--purple-300);
+                    }
+                }
+
+                .tasksBadge {
+                    background-color: var(--gray-400);
+                    border-radius: 999px;
+                    padding: 0.125rem 0.5rem;
+                    font-size: 0.75rem;
+                    line-height: 15px;
+                    color: var(--gray-200);
+                    margin-left: 0.5rem;
+                }
+            }
+
+            .tasks {
+                margin: 1.5rem 0;
+
+                .tasksEmpty {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    min-height: 15.25rem;
+                    border-top: 1px solid var(--gray-400);
+                    border-radius: 8px;
+                    color: var(--gray-300);
+
+                    strong {
+                        font-weight: 700;
+                        font-size: 1rem;
+                        line-height: 140%;
+                        margin-top: 1rem;
+                    }
+                }
+
             }
         }
     }
