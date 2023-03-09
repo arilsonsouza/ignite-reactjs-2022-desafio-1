@@ -21,7 +21,6 @@ Este projeto foi feito utilizando as seguintes tecnologias:
 - [React](https://reactjs.org/)
 - [Typescript](https://www.typescriptlang.org/)
 - [Vite](https://vitejs.dev/)
-- [Sass](https://sass-lang.com/)
 # :construction_worker: Executando
 
 ```bash
